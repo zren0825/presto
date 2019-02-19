@@ -36,6 +36,7 @@ import io.airlift.bytecode.DynamicClassLoader;
 
 import java.lang.invoke.MethodHandle;
 import java.util.List;
+import java.util.Optional;
 
 import static com.facebook.presto.metadata.Signature.internalOperator;
 import static com.facebook.presto.metadata.Signature.orderableTypeParameter;
@@ -144,6 +145,7 @@ public abstract class AbstractMinMaxAggregationFunction
                 generateAggregationName(getSignature().getName(), type.getTypeSignature(), inputTypes.stream().map(Type::getTypeSignature).collect(toImmutableList())),
                 createParameterMetadata(type),
                 inputFunction,
+                Optional.empty(),
                 combineFunction,
                 outputFunction,
                 ImmutableList.of(new AccumulatorStateDescriptor(
